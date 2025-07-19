@@ -1,0 +1,84 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "about"
+    label: "About Me"
+    files:
+      - file: "content/about.md"
+        label: "About"
+        name: "about"
+        fields:
+          - label: "Content"
+            name: "body"
+            widget: "markdown"
+
+  - name: "skills"
+    label: "Skills"
+    files:
+      - file: "content/skills.md"
+        label: "Skills"
+        name: "skills"
+        fields:
+          - label: "Content"
+            name: "body"
+            widget: "markdown"
+
+  - name: "projects"
+    label: "Projects"
+    files:
+      - file: "content/projects.md"
+        label: "Projects"
+        name: "projects"
+        fields:
+          - label: "Content"
+            name: "body"
+            widget: "markdown"
+
+  - name: "interests"
+    label: "My Interests"
+    files:
+      - file: "content/interests.md"
+        label: "Interests"
+        name: "interests"
+        fields:
+          - label: "Content"
+            name: "body"
+            widget: "markdown"
+
+  - name: "news"
+    label: "News"
+    files:
+      - file: "content/news.md"
+        label: "News"
+        name: "news"
+        fields:
+          - label: "Content"
+            name: "body"
+            widget: "markdown"
+
+  - name: "videos"
+    label: "Videos"
+    files:
+      - file: "content/videos.md"
+        label: "Videos"
+        name: "videos"
+        fields:
+          - label: "Content"
+            name: "body"
+            widget: "markdown"
+
+  - name: "contact"
+    label: "Contact"
+    files:
+      - file: "content/contact.md"
+        label: "Contact"
+        name: "contact"
+        fields:
+          - label: "Content"
+            name: "body"
+            widget: "markdown"

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bobby Dhir | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>Bobby Dhir</h1>
+      <ul class="nav-links">
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#interests">My Interests</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="about"><h2>About Me</h2><div id="about-content"></div></section>
+    <section id="skills"><h2>Skills</h2><div id="skills-content"></div></section>
+    <section id="projects"><h2>Projects</h2><div id="projects-content"></div></section>
+    <section id="interests"><h2>My Interests</h2><div id="interests-content"></div></section>
+    <section id="news"><h2>News</h2><div id="news-content"></div></section>
+    <section id="videos"><h2>Interesting Videos</h2><div id="videos-content"></div></section>
+    <section id="contact"><h2>Contact</h2><div id="contact-content"></div></section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Bobby Dhir. All rights reserved.</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+  <script>
+    const sections = ['about', 'skills', 'projects', 'interests', 'news', 'videos', 'contact'];
+    const converter = new showdown.Converter();
+    sections.forEach(section => {
+      fetch(`content/${section}.md`)
+        .then(response => response.text())
+        .then(text => {
+          document.getElementById(`${section}-content`).innerHTML = converter.makeHtml(text);
+        });
+    });
+  </script>
+</body>
+</html>
