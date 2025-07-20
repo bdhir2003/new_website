@@ -1,0 +1,40 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/img"
+public_folder: "/assets/img"
+
+collections:
+  - name: "about"
+    label: "About Me"
+    files:
+      - label: "About Section"
+        name: "about"
+        file: "content/about.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Profile Image", name: "profile_image", widget: "image" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "experience"
+    label: "Experience"
+    folder: "content/experience"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Job Title", name: "title", widget: "string" }
+      - { label: "Company", name: "company", widget: "string" }
+      - { label: "Start Date", name: "start_date", widget: "date" }
+      - { label: "End Date", name: "end_date", widget: "date", required: false }
+      - { label: "Description", name: "description", widget: "text" }
+
+  - name: "videos"
+    label: "Interesting Videos"
+    folder: "content/videos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "YouTube Link", name: "youtube", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }

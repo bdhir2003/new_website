@@ -1,0 +1,117 @@
+html, body{
+	font-size:16px;
+	color: #f5f6fa !important;
+	background-color: #181a1b !important; 
+}
+
+a {
+  color: #f5f6fa !important;
+}
+
+a:hover {
+  color: #f5f6fa !important;
+}
+
+section{
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+.section-1 {
+	background: #181a1b !important;
+}
+
+.section-2 {
+	background-color: #181a1b !important;
+}
+
+.section-3 {
+	background-color: #181a1b !important;
+}
+
+.section-4 {
+	background-color: #181a1b !important;
+	padding: 0.2rem;
+}
+
+a.nav-item {
+	color: #f5f6fa !important;
+}
+
+a.nav-item:hover {
+	color: #fff;
+}
+
+.avatar{
+	height:200px;
+	border-radius: 50%;
+}
+
+.intro-description{
+	padding-top: 1rem;
+}
+
+.social-container img{
+	max-width:100%;
+	max-height:175px;
+	margin-bottom:15px;
+}
+
+.project-figure {
+	margin: 0 auto 1rem auto;
+	max-height: 256px;
+	max-width: 256px;
+}
+
+.project-text {
+	text-align: justify;
+	background-color: #232526 !important;
+	color: #f5f6fa !important;
+	border: none;
+}
+
+.box {
+	background-color: #232526 !important;
+	border: none;
+}
+
+.title {
+	color: #f5f6fa !important;
+	text-align: left;
+	margin-bottom: 2rem;
+}
+
+.intro {
+	text-align: justify;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.void-background {
+	background-color: #181a1b !important; 
+}
+
+input, textarea, select {
+  background-color: #232526 !important;
+  color: #f5f6fa !important;
+  border: 1px solid #444;
+}
+
+@media screen and (max-width: 768px) {
+	.nav-menu {
+		background-color: #181a1b !important;
+	}
+
+	.nav-toggle:hover {
+		background-color: transparent;
+	}
+
+	.nav-toggle span {
+		background-color: #dfdfdf;
+	}
+
+	.nav-toggle span:hover {
+		background-color: #fff;
+	}
+
+}
