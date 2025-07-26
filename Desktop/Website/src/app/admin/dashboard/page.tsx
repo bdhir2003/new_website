@@ -83,8 +83,8 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      // Fetch stats from all sections
-      const [aboutRes, educationRes, achievementsRes, projectsRes, skillsRes, videosRes, podcastsRes, awardsRes] = await Promise.all([
+      // Fetch stats from all sections, including publications
+      const [aboutRes, educationRes, achievementsRes, projectsRes, skillsRes, videosRes, podcastsRes, awardsRes, publicationsRes] = await Promise.all([
         fetch('/api/portfolio/about'),
         fetch('/api/portfolio/education'),
         fetch('/api/portfolio/achievements'),
@@ -93,9 +93,10 @@ export default function AdminDashboard() {
         fetch('/api/portfolio/videos'),
         fetch('/api/portfolio/podcasts'),
         fetch('/api/portfolio/awards'),
+        fetch('/api/portfolio/publications'),
       ]);
 
-      const [about, education, achievements, projects, skills, videos, podcasts, awards] = await Promise.all([
+      const [about, education, achievements, projects, skills, videos, podcasts, awards, publications] = await Promise.all([
         aboutRes.json(),
         educationRes.json(),
         achievementsRes.json(),
@@ -104,6 +105,7 @@ export default function AdminDashboard() {
         videosRes.json(),
         podcastsRes.json(),
         awardsRes.json(),
+        publicationsRes.json(),
       ]);
 
       setStats({
@@ -115,6 +117,7 @@ export default function AdminDashboard() {
         videos: videos.success ? videos.data.length : 0,
         podcasts: podcasts.success ? podcasts.data.length : 0,
         awards: awards.success ? awards.data.length : 0,
+        publications: publications.success ? publications.data.length : 0,
       });
     } catch (error) {
       console.error('Error fetching stats:', error);
