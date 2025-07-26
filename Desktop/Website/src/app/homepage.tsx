@@ -185,7 +185,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-gray-400">© 2025 Your Name. All rights reserved.</p>
+          <p className="text-gray-400">© 2025 Mamello Makhele. All rights reserved.</p>
           {isAdmin && (
             <p className="text-sm text-blue-400 mt-2">
               Admin panel available at{' '}
