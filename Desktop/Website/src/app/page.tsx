@@ -13,9 +13,14 @@ import PodcastsSection from '@/components/PodcastsSection';
 import PublicationsSection from '@/components/PublicationsSection';
 import AwardsSection from '@/components/AwardsSection';
 
+interface AboutData {
+  heroTitle?: string;
+  heroSubtitle?: string;
+}
+
 export default function HomePage() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [aboutData, setAboutData] = useState<any>(null);
+  const [aboutData, setAboutData] = useState<AboutData | null>(null);
 
   useEffect(() => {
     // Check if user is logged in as admin
@@ -42,11 +47,15 @@ export default function HomePage() {
     // Fetch about data for hero section
     const fetchAboutData = async () => {
       try {
-        // Add timestamp to prevent caching
         const response = await fetch(`/api/portfolio/about?t=${Date.now()}`);
-        const result = await response.json();
-        if (result.success) {
-          setAboutData(result.data);
+        const text = await response.text();
+        try {
+          const result = JSON.parse(text);
+          if (result.success) {
+            setAboutData(result.data);
+          }
+        } catch (e) {
+          console.error('API did not return JSON:', text);
         }
       } catch (error) {
         console.error('Error fetching about data:', error);

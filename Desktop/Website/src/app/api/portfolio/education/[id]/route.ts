@@ -3,8 +3,12 @@ import connectDB from '@/lib/mongodb';
 import { EducationModel } from '@/models/Portfolio';
 import { getTokenFromRequest, verifyToken, isAdmin } from '@/lib/auth';
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(
+  request: NextRequest, 
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     // Check authentication and admin role
     const token = getTokenFromRequest(request);
     if (!token) {
@@ -26,7 +30,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     
     const educationData = await request.json();
     const education = await EducationModel.findByIdAndUpdate(
-      params.id,
+      id,
       educationData,
       { new: true }
     );
@@ -51,8 +55,12 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest, 
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     // Check authentication and admin role
     const token = getTokenFromRequest(request);
     if (!token) {
@@ -72,7 +80,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 
     await connectDB();
     
-    const education = await EducationModel.findByIdAndDelete(params.id);
+    const education = await EducationModel.findByIdAndDelete(id);
 
     if (!education) {
       return NextResponse.json(

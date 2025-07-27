@@ -19,8 +19,12 @@ const ProjectSchema = new Schema({
 
 const ProjectModel = models.SimpleProject || model('SimpleProject', ProjectSchema);
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(
+  request: NextRequest, 
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     const token = getTokenFromRequest(request);
     if (!token) {
       return NextResponse.json(
@@ -40,10 +44,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     await connectDB();
     
     const projectData = await request.json();
-    console.log('Updating project:', params.id, projectData);
+    console.log('Updating project:', id, projectData);
     
     const project = await ProjectModel.findByIdAndUpdate(
-      params.id,
+      id,
       projectData,
       { new: true, runValidators: true }
     );
@@ -68,8 +72,12 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest, 
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     const token = getTokenFromRequest(request);
     if (!token) {
       return NextResponse.json(
@@ -88,7 +96,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 
     await connectDB();
     
-    const project = await ProjectModel.findByIdAndDelete(params.id);
+    const project = await ProjectModel.findByIdAndDelete(id);
 
     if (!project) {
       return NextResponse.json(

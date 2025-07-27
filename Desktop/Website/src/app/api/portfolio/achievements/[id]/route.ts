@@ -16,8 +16,12 @@ const AchievementSchema = new Schema({
 
 const AchievementModel = models.SimpleAchievement || model('SimpleAchievement', AchievementSchema);
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(
+  request: NextRequest, 
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     const token = getTokenFromRequest(request);
     if (!token) {
       return NextResponse.json(
@@ -38,7 +42,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     
     const achievementData = await request.json();
     const achievement = await AchievementModel.findByIdAndUpdate(
-      params.id,
+      id,
       achievementData,
       { new: true, runValidators: false }
     );
@@ -63,8 +67,12 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest, 
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     const token = getTokenFromRequest(request);
     if (!token) {
       return NextResponse.json(
@@ -83,7 +91,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 
     await connectDB();
     
-    const achievement = await AchievementModel.findByIdAndDelete(params.id);
+    const achievement = await AchievementModel.findByIdAndDelete(id);
 
     if (!achievement) {
       return NextResponse.json(

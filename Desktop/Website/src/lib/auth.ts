@@ -1,29 +1,46 @@
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 import { NextRequest } from 'next/server';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-key';
-
-export async function hashPassword(password: string): Promise<string> {
-  const saltRounds = 12;
-  return await bcrypt.hash(password, saltRounds);
+interface UserPayload {
+  id: string;
+  email: string;
+  role: string;
 }
 
-export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
-  return await bcrypt.compare(password, hashedPassword);
+interface DecodedToken {
+  id: string;
+  email: string;
+  role: string;
+  iat: number;
+  exp: number;
 }
 
-export function generateToken(payload: any): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
-}
+export const generateToken = (payload: UserPayload): string => {
+  const secret = process.env.JWT_SECRET || 'your-secret-key';
+  return jwt.sign(payload, secret, { expiresIn: '24h' });
+};
 
-export function verifyToken(token: string): any {
+export const verifyToken = (token: string): DecodedToken | null => {
   try {
-    return jwt.verify(token, JWT_SECRET);
+    const secret = process.env.JWT_SECRET || 'your-secret-key';
+    return jwt.verify(token, secret) as DecodedToken;
   } catch (error) {
     return null;
   }
-}
+};
+
+export const hashPassword = async (password: string): Promise<string> => {
+  const saltRounds = 10;
+  return bcrypt.hash(password, saltRounds);
+};
+
+export const comparePassword = async (password: string, hashedPassword: string): Promise<boolean> => {
+  return bcrypt.compare(password, hashedPassword);
+};
+
+// Alias for backward compatibility
+export const verifyPassword = comparePassword;
 
 export function getTokenFromRequest(request: NextRequest): string | null {
   // First check Authorization header
@@ -41,6 +58,6 @@ export function getTokenFromRequest(request: NextRequest): string | null {
   return null;
 }
 
-export function isAdmin(user: any): boolean {
-  return user && user.role === 'admin';
+export function isAdmin(user: DecodedToken | null): boolean {
+  return Boolean(user && user.role === 'admin');
 }
