@@ -181,57 +181,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Default portfolio data to show when localStorage is empty
+const defaultPortfolioData = {
+    hero: {
+        name: 'Mamello Makhele',
+        title: 'Computer Science Student',
+        tagline: 'Passionate about AI, Machine Learning, and Software Development'
+    },
+    personal: {
+        fullName: 'Mamello Makhele'
+    },
+    about: {
+        description: 'I am a dedicated Computer Science student with a passion for artificial intelligence and machine learning. I enjoy working on innovative projects that solve real-world problems and am always eager to learn new technologies.',
+        profileImage: 'https://via.placeholder.com/300x300/667eea/ffffff?text=MM'
+    },
+    education: [
+        {
+            id: '1',
+            institution: 'University of Nebraska at Omaha',
+            degree: 'Bachelor of Science in Computer Science',
+            year: '2022-2026',
+            description: 'Focusing on Artificial Intelligence and Machine Learning'
+        }
+    ],
+    skills: {
+        'Programming Languages': ['Python', 'JavaScript', 'Java', 'C++'],
+        'Web Development': ['HTML', 'CSS', 'React', 'Node.js'],
+        'Data Science': ['Machine Learning', 'Data Analysis', 'Statistics'],
+        'Tools & Technologies': ['Git', 'VS Code', 'MongoDB', 'SQL']
+    },
+    projects: [
+        {
+            id: '1',
+            title: 'AI Fairness in Healthcare',
+            description: 'Research project analyzing bias in machine learning models used for healthcare predictions.',
+            technologies: ['Python', 'Scikit-learn', 'Pandas'],
+            link: '#'
+        },
+        {
+            id: '2',
+            title: 'Student Portfolio Website',
+            description: 'Modern, responsive portfolio website with admin panel for content management.',
+            technologies: ['HTML', 'CSS', 'JavaScript'],
+            link: '#'
+        }
+    ],
+    contact: {
+        email: 'mamello.makhele@example.com',
+        linkedin: 'linkedin.com/in/mamellomakhele'
+    }
+};
+
 // Load all portfolio data from localStorage (enhanced version)
 function loadAllPortfolioData() {
     const savedData = localStorage.getItem('portfolioData');
+    let data = defaultPortfolioData; // Start with default data
+    
     if (savedData) {
         try {
-            const data = JSON.parse(savedData);
-            console.log('Loading portfolio data:', data); // Debug log
-            
-            // Load personal information
-            loadPersonalData(data);
-            
-            // Load about information
-            loadAboutData(data);
-            
-            // Load education data
-            loadEducationData(data);
-            
-            // Load skills data
-            loadSkillsData(data);
-            
-            // Load projects data
-            loadProjectsData(data);
-            
-            // Load publications data
-            loadPublicationsData(data);
-            
-            // Load podcasts data
-            loadPodcastsData(data);
-            
-            // Load videos data
-            loadVideosData(data);
-            
-            // Load awards data
-            loadAwardsData(data);
-            
-            // Load contact data
-            loadContactData(data);
-            
+            const parsedData = JSON.parse(savedData);
+            // Merge saved data with default data, giving priority to saved data
+            data = { ...defaultPortfolioData, ...parsedData };
+            console.log('Loading saved portfolio data:', data); // Debug log
         } catch (e) {
-            console.warn('Failed to load portfolio data:', e);
+            console.warn('Failed to load portfolio data, using defaults:', e);
         }
+    } else {
+        console.log('No saved data found, using default portfolio data');
     }
+    
+    // Load all sections with data (either saved or default)
+    loadPersonalData(data);
+    loadAboutData(data);
+    loadEducationData(data);
+    loadSkillsData(data);
+    loadProjectsData(data);
+    loadPublicationsData(data);
+    loadPodcastsData(data);
+    loadVideosData(data);
+    loadAwardsData(data);
+    loadContactData(data);
 }
 
 // Load personal information (enhanced)
 function loadPersonalData(data) {
-    if (!data.personal) return;
+    if (!data.personal && !data.hero) return;
     
     // Determine which data to use - hero data takes precedence for home section
     const heroData = data.hero || {};
-    const personalData = data.personal;
+    const personalData = data.personal || {};
     
     // Update navigation name (always use personal name)
     const navName = document.getElementById('navName');
@@ -245,62 +283,31 @@ function loadPersonalData(data) {
         const name = heroData.name || personalData.fullName;
         if (name && name.trim() && name !== 'Your Name') {
             homeName.textContent = name;
-        } else {
-            homeName.textContent = 'Add your name in admin panel';
-            homeName.className = 'no-content';
         }
     }
     
+    // Update home title
     const homeTitle = document.getElementById('homeTitle');
-    if (homeTitle) {
-        const title = heroData.title || personalData.title;
-        if (title && title.trim()) {
-            homeTitle.textContent = title;
-            homeTitle.className = '';
-        } else {
-            homeTitle.textContent = 'Add your title in the admin panel';
-            homeTitle.className = 'no-content';
-        }
+    if (homeTitle && heroData.title) {
+        homeTitle.textContent = heroData.title;
     }
     
+    // Update home tagline
     const homeTagline = document.getElementById('homeTagline');
-    if (homeTagline) {
-        const tagline = heroData.tagline || personalData.tagline;
-        if (tagline && tagline.trim()) {
-            homeTagline.textContent = tagline;
-            homeTagline.className = '';
-        } else {
-            homeTagline.textContent = 'Add your tagline in the admin panel';
-            homeTagline.className = 'no-content';
-        }
+    if (homeTagline && heroData.tagline) {
+        homeTagline.textContent = heroData.tagline;
     }
     
-    // Update hero subtitle if it exists
-    const homeSubtitle = document.getElementById('homeSubtitle');
-    if (homeSubtitle) {
-        if (heroData.subtitle && heroData.subtitle.trim()) {
-            homeSubtitle.textContent = heroData.subtitle;
-            homeSubtitle.style.display = 'block';
-        } else {
-            homeSubtitle.style.display = 'none';
-        }
+    // Update footer name
+    const footerName = document.getElementById('footerName');
+    if (footerName && personalData.fullName) {
+        footerName.textContent = personalData.fullName;
     }
     
-    // Update hero button
-    const heroButton = document.querySelector('.home .btn');
-    if (heroButton) {
-        heroButton.textContent = heroData.buttonText || 'Learn More About Me';
-        heroButton.href = heroData.buttonUrl || '#about';
-    }
-    
-    // Update profile image with enhanced error handling
+    // Update profile image
     const profileImg = document.getElementById('profileImage');
-    if (profileImg && personalData.profileImage && personalData.profileImage.trim() !== '') {
-        profileImg.src = personalData.profileImage;
-        profileImg.onerror = function() {
-            // If image fails to load, revert to placeholder
-            this.src = 'https://via.placeholder.com/300x300/3498db/ffffff?text=Your+Photo';
-        };
+    if (profileImg && data.about && data.about.profileImage) {
+        profileImg.src = data.about.profileImage;
     }
 }
 
@@ -309,14 +316,8 @@ function loadAboutData(data) {
     if (!data.about) return;
     
     const aboutDescription = document.getElementById('aboutDescription');
-    if (aboutDescription) {
-        if (data.about.description && data.about.description.trim()) {
-            aboutDescription.textContent = data.about.description;
-            aboutDescription.classList.remove('no-content');
-        } else {
-            aboutDescription.textContent = 'No description available yet. Use the admin panel to add your story!';
-            aboutDescription.className = 'no-content';
-        }
+    if (aboutDescription && data.about.description) {
+        aboutDescription.textContent = data.about.description;
     }
 }
 
@@ -401,6 +402,29 @@ function loadSkillsData(data) {
             allSkillsContainer.appendChild(skillElement);
         });
     }
+    // Handle object format with categories (like default data)
+    else if (data.skills && typeof data.skills === 'object' && !Array.isArray(data.skills)) {
+        let skillIndex = 0;
+        Object.keys(data.skills).forEach(category => {
+            if (Array.isArray(data.skills[category])) {
+                // Add category header
+                const categoryHeader = document.createElement('div');
+                categoryHeader.className = 'skill-category-header';
+                categoryHeader.textContent = category;
+                allSkillsContainer.appendChild(categoryHeader);
+                
+                // Add skills in this category
+                data.skills[category].forEach(skill => {
+                    const skillElement = document.createElement('span');
+                    skillElement.className = 'skill fade-in';
+                    skillElement.style.animationDelay = `${skillIndex * 0.05}s`;
+                    skillElement.textContent = skill.trim();
+                    allSkillsContainer.appendChild(skillElement);
+                    skillIndex++;
+                });
+            }
+        });
+    }
     // Handle old simplified format (array of strings)
     else if (data.skills && data.skills.all && Array.isArray(data.skills.all) && data.skills.all.length > 0) {
         data.skills.all.forEach((skill, index) => {
@@ -410,28 +434,6 @@ function loadSkillsData(data) {
             skillElement.textContent = skill.trim();
             allSkillsContainer.appendChild(skillElement);
         });
-    } 
-    // Handle old format for backward compatibility
-    else if (data.skills && (data.skills.programming || data.skills.web || data.skills.tools)) {
-        const allSkills = [
-            ...(data.skills.programming || []),
-            ...(data.skills.web || []),
-            ...(data.skills.tools || [])
-        ];
-        
-        if (allSkills.length > 0) {
-            allSkills.forEach((skill, index) => {
-                const skillElement = document.createElement('span');
-                skillElement.className = 'skill fade-in';
-                skillElement.style.animationDelay = `${index * 0.05}s`;
-                skillElement.textContent = skill.trim();
-                allSkillsContainer.appendChild(skillElement);
-            });
-        } else {
-            allSkillsContainer.innerHTML = '<p class="no-content">No skills added yet. Use the admin panel to add your skills!</p>';
-        }
-    } else {
-        allSkillsContainer.innerHTML = '<p class="no-content">No skills added yet. Use the admin panel to add your skills!</p>';
     }
 }
 

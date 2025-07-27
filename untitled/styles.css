@@ -576,6 +576,28 @@ section h2::after {
     margin: 0 auto;
 }
 
+.skill-category-header {
+    grid-column: 1 / -1;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+    text-align: center;
+    position: relative;
+}
+
+.skill-category-header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 1px;
+}
+
 .skill {
     background: var(--background-white);
     color: var(--text-primary);
