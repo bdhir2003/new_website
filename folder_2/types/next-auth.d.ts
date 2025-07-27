@@ -16,3 +16,5 @@ declare module "next-auth/jwt" {
     role?: string;
   }
 }
+
+cd /Users/bobbydhir/folder_2
