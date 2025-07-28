@@ -1,21 +1,52 @@
-# Netlify Configuration
-# This file helps Netlify deploy your site correctly
+# Netlify Configuration for Student Portfolio
+# This connects your GitHub repository to Netlify for auto-deployment
 
 # Build settings
 [build]
   # No build command needed for static site
   publish = "."
+  
+# GitHub integration - automatic deployment
+[build.environment]
+  # This ensures Netlify pulls from your GitHub repo
+  NODE_VERSION = "18"
+  # CRITICAL: Disable Netlify Identity completely
+  NETLIFY_IDENTITY_ENABLED = "false"
 
-# Redirect rules for admin access
+# OVERRIDE all Netlify Identity redirects - FORCE our custom admin
+[[redirects]]
+  from = "/.netlify/identity/*"
+  to = "/admin-login.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin/accept-invite*"
+  to = "/admin-login.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin/login*"
+  to = "/admin-login.html" 
+  status = 301
+  force = true
+
+# Our custom admin system
 [[redirects]]
   from = "/admin"
-  to = "/secret-login-2025.html"
+  to = "/admin-login.html"
   status = 200
 
-# Direct access to admin panel (after login redirect)
 [[redirects]]
   from = "/admin-panel"
-  to = "/secret-portfolio-admin-2025.html"
+  to = "/admin.html"
+  status = 200
+
+# Catch all admin routes to our custom login
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin-login.html"
   status = 200
 
 # Error page handling
@@ -24,7 +55,7 @@
   to = "/index.html"
   status = 404
 
-# Headers for better performance
+# Headers for better performance and security
 [[headers]]
   for = "/*"
   [headers.values]
@@ -45,7 +76,7 @@
 
 # Protect admin files from search engines
 [[headers]]
-  for = "/secret-*"
+  for = "/admin*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
     Cache-Control = "no-cache, no-store, must-revalidate"

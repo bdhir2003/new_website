@@ -1,0 +1,55 @@
+# Disable Netlify Identity completely
+# Force all admin access to use our custom system
+
+# Override any existing Netlify Identity redirects
+[[redirects]]
+  from = "/.netlify/identity/*"
+  to = "/admin-login.html"
+  status = 301
+  force = true
+
+# Override Netlify Identity invite acceptances  
+[[redirects]]
+  from = "/admin/accept-invite"
+  to = "/admin-login.html"
+  status = 301
+  force = true
+
+# Override Netlify Identity login attempts
+[[redirects]]
+  from = "/admin/login"
+  to = "/admin-login.html" 
+  status = 301
+  force = true
+
+# Main admin redirect to our custom login
+[[redirects]]
+  from = "/admin"
+  to = "/admin-login.html"
+  status = 200
+
+# Admin panel after login
+[[redirects]]
+  from = "/admin-panel"
+  to = "/admin.html"
+  status = 200
+
+# Catch all admin routes
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin-login.html"
+  status = 200
+
+# Error handling
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
+
+# Build settings
+[build]
+  publish = "."
+  
+# Completely disable Netlify Identity service
+[build.environment]
+  NETLIFY_IDENTITY_ENABLED = "false"
