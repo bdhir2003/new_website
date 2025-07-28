@@ -1,0 +1,56 @@
+# Netlify Configuration
+# This file helps Netlify deploy your site correctly
+
+# Build settings
+[build]
+  # No build command needed for static site
+  publish = "."
+
+# Redirect rules for admin access
+[[redirects]]
+  from = "/admin"
+  to = "/secret-login-2025.html"
+  status = 200
+
+# Direct access to admin panel (after login redirect)
+[[redirects]]
+  from = "/admin-panel"
+  to = "/secret-portfolio-admin-2025.html"
+  status = 200
+
+# Error page handling
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
+
+# Headers for better performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+
+# Cache static assets
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Protect admin files from search engines
+[[headers]]
+  for = "/secret-*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/admin*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
