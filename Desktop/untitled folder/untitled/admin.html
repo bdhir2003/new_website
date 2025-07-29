@@ -10,25 +10,8 @@
 <body>
     <!-- Authentication Check Script -->
     <script>
-        (function() {
-            // Check if user is authenticated
-            const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
-            const loginTime = sessionStorage.getItem('adminLoginTime');
-            const currentTime = Date.now();
-            
-            // Session expires after 2 hours (2 * 60 * 60 * 1000 = 7200000 ms)
-            const sessionDuration = 2 * 60 * 60 * 1000;
-            
-            if (!isAuthenticated || !loginTime || (currentTime - parseInt(loginTime)) > sessionDuration) {
-                // Clear expired session
-                sessionStorage.removeItem('adminAuthenticated');
-                sessionStorage.removeItem('adminLoginTime');
-                
-                // Redirect to login page
-                window.location.href = 'admin-login.html';
-                return;
-            }
-        })();
+        // Temporarily disable authentication - admin is now open access
+        console.log('Admin authentication disabled for development');
     </script>
 
     <!-- Admin Header -->

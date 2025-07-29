@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portfolio - Your Name</title>
+    <title>Student Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <script src="disable-netlify-identity.js"></script>
 </head>
@@ -54,7 +54,7 @@
             <p id="homeTitle"><!-- Title will be loaded from admin panel --></p>
             <p id="homeTagline"><!-- Tagline will be loaded from admin panel --></p>
             <p id="homeSubtitle" class="hero-subtitle" style="display: none;"></p>
-            <a href="#about" class="btn">Learn More About Me</a>
+            <a href="#about" class="btn" id="heroButton">Learn More About Me</a>
         </div>
     </section>
 
@@ -64,7 +64,7 @@
             <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img id="profileImage" src="https://via.placeholder.com/300x300/3498db/ffffff?text=Your+Photo" alt="Profile Picture" class="profile-img">
+                    <img id="profileImage" src="" alt="Profile Picture" class="profile-img" style="display: none;">
                 </div>
                 <div class="about-text">
                     <p id="aboutDescription"><!-- About description will be loaded from admin panel --></p>
@@ -157,12 +157,12 @@
                     <div class="contact-info" id="contactInfo">
                         <div class="contact-item">
                             <h3>Email</h3>
-                            <p id="contactEmail">your.email@example.com</p>
+                            <p id="contactEmail"><!-- Email will be loaded from admin panel --></p>
                         </div>
                         
                         <div class="contact-item">
                             <h3>LinkedIn</h3>
-                            <p id="contactLinkedin">linkedin.com/in/yourprofile</p>
+                            <p id="contactLinkedin"><!-- LinkedIn will be loaded from admin panel --></p>
                         </div>
                     </div>
                     
@@ -180,7 +180,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 <span id="footerName">Your Name</span>. All rights reserved.</p>
+            <p>&copy; 2025 <span id="footerName"><!-- Name will be loaded from admin panel --></span>. All rights reserved.</p>
         </div>
     </footer>
 
@@ -188,37 +188,5 @@
     
     <!-- Load static portfolio data if available -->
     <script src="portfolio-data.js"></script>
-    
-    <!-- Ensure Mamello Makhele name is set -->
-    <script>
-        // Additional script to ensure name is properly set
-        document.addEventListener('DOMContentLoaded', function() {
-            // Make sure localStorage has the correct name
-            let portfolioData = JSON.parse(localStorage.getItem('portfolioData') || '{}');
-            
-            if (!portfolioData.hero) portfolioData.hero = {};
-            if (!portfolioData.personal) portfolioData.personal = {};
-            
-            // Always ensure the name is Mamello Makhele
-            portfolioData.hero.name = 'Mamello Makhele';
-            portfolioData.personal.fullName = 'Mamello Makhele';
-            
-            localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
-            
-            // Directly set the name in the DOM
-            const homeName = document.getElementById('homeName');
-            if (homeName) {
-                homeName.textContent = 'Mamello Makhele';
-                homeName.className = 'highlight';
-            }
-            
-            const footerName = document.getElementById('footerName');
-            if (footerName) {
-                footerName.textContent = 'Mamello Makhele';
-            }
-            
-            console.log('Name set to:', portfolioData.hero.name);
-        });
-    </script>
 </body>
 </html>
