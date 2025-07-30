@@ -1,0 +1,33 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "site"
+    label: "Site Content"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "content"
+        label: "Main Content"
+        file: "data/site.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string", required: false }
+          - { label: "About", name: "about", widget: "text" }
+          - label: "Skills"
+            name: "skills"
+            widget: "list"
+            fields:
+              - { label: "Skill", name: "name", widget: "string" }
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Link", name: "link", widget: "string", required: false }

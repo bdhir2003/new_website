@@ -1,0 +1,17 @@
+{
+  "hero_title": "Hi, I'm Bobby!",
+  "hero_subtitle": "General Science student & ML enthusiast",
+  "about": "This is a short paragraph about me and my interests.",
+  "skills": [
+    { "name": "Python" },
+    { "name": "Machine Learning" },
+    { "name": "Data Analysis" }
+  ],
+  "projects": [
+    {
+      "title": "FairCare",
+      "description": "Evaluating fairness in health risk prediction models.",
+      "link": "#"
+    }
+  ]
+}
