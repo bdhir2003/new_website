@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bobby Dhir | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <button class="menu-toggle" onclick="document.querySelector('.navbar').classList.toggle('open')">
+      &#9776;
+    </button>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section id="home" class="hero">
+    <div class="hero-right" style="display:block;margin:0 auto;text-align:center;">
+      <img src="admin/profile.jpg" alt="Bobby Dhir" class="hero-img-circle" style="margin:0 auto;display:block;">
+    </div>
+    <div class="hero-left">
+      <h1>Hi, I am<br><span class="hero-name">Bobby Dhir</span></h1>
+      <h2>Main focus on <span class="hero-highlight">Machine Learning & AI</span></h2>
+      <p class="hero-desc">
+        I’m an undergraduate student at the University of Nebraska Omaha, majoring in Computer Science. I enjoy exploring technology, learning new skills, and finding creative ways to solve problems. Outside of academics, I like connecting with people, sharing ideas, and discovering new experiences that help me grow personally and professionally.
+      </p>
+      <a href="#" class="hero-resume-btn">Resume</a>
+    </div>
+  </section>
+  <section id="skills" class="skills-section">
+      <h2>SKILLS</h2>
+      <div class="skills-grid">
+        <div class="skill-card" style="background:linear-gradient(135deg,#3b82f6 40%,#8b5cf6 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">Strategic Planning</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#8b5cf6 40%,#3b82f6 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">JavaScript</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#3b82f6 40%,#06b6d4 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">Presentation Skills</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#06b6d4 40%,#3b82f6 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">Python</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#8b5cf6 40%,#06b6d4 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">Time Management</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#3b82f6 40%,#8b5cf6 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">Teamwork</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#06b6d4 40%,#3b82f6 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">Collaboration</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#8b5cf6 40%,#3b82f6 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">OpenAI Scripting</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#3b82f6 40%,#06b6d4 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">Machine Learning</div>
+        <div class="skill-card" style="background:linear-gradient(135deg,#06b6d4 40%,#8b5cf6 100%);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.18);font-weight:700;letter-spacing:1px;">Data Analysis</div>
+      </div>
+    </section>
+  <section id="experience" class="experience-section">
+    <h2 class="exp-title">PROFESSIONAL EXPERIENCE</h2>
+    <div class="exp-timeline">
+      <div class="exp-timeline-row">
+        <div class="exp-timeline-dot"></div>
+        <div class="exp-timeline-line"></div>
+        <div class="exp-card-vertical">
+          <div class="exp-card-header">
+            <div>
+              <h3 class="exp-card-title">Sodexo Cashier</h3>
+              <div class="exp-card-company">University of Nebraska at Omaha, Omaha, NE</div>
+            </div>
+          </div>
+          <div class="exp-card-date">September 2024 – August 2025</div>
+          <ul class="exp-card-desc">
+            <li>Efficiently help check out 90+ students and faculty per week</li>
+            <li>Collaborate with team members to restock impulse-buy items and optimize store layout for better customer flow</li>
+            <li>Help students and faculty check out quickly by scanning items, handling payments, and giving correct change to ensure a smooth shopping experience</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-timeline-row">
+        <div class="exp-timeline-dot"></div>
+        <div class="exp-timeline-line"></div>
+        <div class="exp-card-vertical">
+          <div class="exp-card-header">
+            <div>
+              <h3 class="exp-card-title">Junior Manager</h3>
+              <div class="exp-card-company">Gandhi Cloth House, Rayya, Punjab</div>
+            </div>
+          </div>
+          <div class="exp-card-date">April 2023 – March 2024</div>
+          <ul class="exp-card-desc">
+            <li>Managed the daily operations of the store, making sure everything ran smoothly, and customers received quick and friendly service</li>
+            <li>Handled cash, card, and digital payments carefully, ensuring all transactions were accurate and the cash register balanced at the end of each shift</li>
+            <li>Organized work schedules for 15+ employees to ensure the store was always well-staffed and running smoothly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="projects" class="projects-section">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card-adv" style="background: #23232a; border-radius: 18px; box-shadow: 0 2px 12px rgba(59,130,246,0.10); padding: 32px; text-align: left;">
+          <div style="flex: 1;">
+            <h3 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 18px; text-align: center; color: #fff;">FairCare: Evaluating Fairness in Health Risk Prediction Models Using Statistical Machine Learning</h3>
+            <p style="font-size: 1.18rem; color: #e5e7eb; text-align: center;">This project focuses on predicting 30-day hospital readmission for diabetic patients using the UCI Diabetes dataset (20,000 samples). I implemented machine learning models such as logistic regression, random forest, and SVM to replicate and extend results from recent healthcare studies. A key part of the project was evaluating fairness, following the Mishra & Khazanchi (2025) fairness framework, to identify disparities in predictions across demographic groups like age, gender, and race. The project highlights how predictive models can be both accurate and fair, contributing to more ethical and inclusive healthcare AI systems.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  <section id="contact" class="contact-section">
+    <h2>Contact</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+    <div class="contact-info">
+      <p>Email: <a href="mailto:bdhir@unomaha.edu" style="color:#3b82f6;">bdhir@unomaha.edu</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/bobby-dhir-635780298/" style="color:#3b82f6;" target="_blank">linkedin.com/in/bobby-dhir-635780298</a></p>
+    </div>
+  </section>
+  <footer>
+    &copy; 2025 Bobby Dhir. All rights reserved.
+  </footer>
+</body>
+</html>
